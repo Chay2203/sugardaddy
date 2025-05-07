@@ -1,4 +1,4 @@
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -12,4 +12,16 @@ export interface PaginatedResponse<T> extends ApiResponse<T> {
     total: number;
     totalPages: number;
   };
+}
+
+export interface ErrorResponse {
+  success: false;
+  error: string;
+  message?: string;
+}
+
+export interface SuccessResponse<T> {
+  success: true;
+  data: T;
+  message?: string;
 } 
