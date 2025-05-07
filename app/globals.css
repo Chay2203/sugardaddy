@@ -29,20 +29,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Custom Fonts */
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('/fonts/PlayfairDisplay-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
 }
 
 /* Custom Styles */
 .font-serif {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-playfair), serif;
 }
 
 .font-poppins {
