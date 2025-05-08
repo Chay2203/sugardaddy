@@ -46,10 +46,10 @@ export default function Home() {
         opacity={0.7}
         colors={['#FFB84C', '#1B365D', '#FFA726', '#FFD700']}
       />
-      <main className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-20 flex flex-col items-center justify-center min-h-screen pb-15">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-20 flex flex-col items-center justify-center min-h-screen pb-25">
         <div className="relative mb-2 w-full sm:w-auto text-center">
           <button 
-            className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[40%] mb-4 sm:mb-0 sm:w-auto"
+            className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[50%] mb-4 sm:mb-0 sm:w-auto"
           >
             wanna be a?
           </button>
