@@ -34,7 +34,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden">
+    <div className="min-h-screen bg-white relative overflow-hidden "> 
       <ReactConfetti
         width={windowSize.width}
         height={windowSize.height}
@@ -46,10 +46,10 @@ export default function Home() {
         opacity={0.7}
         colors={['#FFB84C', '#1B365D', '#FFA726', '#FFD700']}
       />
-      <main className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-20 flex flex-col items-center justify-center min-h-screen">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 py-8 sm:py-20 flex flex-col items-center justify-center min-h-screen pb-15">
         <div className="relative mb-2 w-full sm:w-auto text-center">
           <button 
-            className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-xl sm:text-2xl font-poppins font-medium px-8 sm:px-12 py-3 sm:py-4 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[40%] mb-4 sm:mb-0 sm:w-auto"
+            className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[40%] mb-4 sm:mb-0 sm:w-auto"
           >
             wanna be a?
           </button>
@@ -60,8 +60,7 @@ export default function Home() {
           </h1>
         </div>
         
-        {/* Tagline */}
-        <div className="fixed bottom-6 sm:bottom-8 text-center w-full sm:w-auto px-4">
+        <div className="fixed bottom-50 sm:bottom-8 text-center w-full sm:w-auto px-4">
           <p className="font-poppins text-[#1B365D]/70 text-xs sm:text-sm tracking-wider uppercase mb-1">
             Built on <span className="font-semibold">Solana</span>
           </p>
