@@ -49,11 +49,11 @@ export default function Home() {
         opacity={0.7}
         colors={['#FFB84C', '#1B365D', '#FFA726', '#FFD700']}
       />
-      <main className={`relative max-w-6xl mx-auto px-4 flex flex-col items-center ${windowSize.width > 1000 ? 'pt-10' : 'pt-0'}`}>
+      <main className={`relative max-w-6xl mx-auto px-4 flex flex-col items-center ${windowSize.width > 786 ? 'pt-10' : 'pt-10'}`}>
         <div className="flex flex-col items-center justify-center min-h-[50vh] w-full">
           <div className="relative mb-2 w-full sm:w-auto text-center">
             <button
-              className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[30%] mb-4 sm:mb-0 sm:w-auto"
+              className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[40%] mb-4 sm:mb-0 sm:w-auto"
             >
               are you a?
             </button>
@@ -66,7 +66,7 @@ export default function Home() {
           <div className="relative w-full sm:w-auto text-center">
             <button
               onClick={() => setShowVerification(true)}
-              className="bg-[#1B365D] hover:bg-[#1B365D]/90 text-[#FFB84C] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform italic tracking-tighter w-[70%] sm:w-auto"
+              className="bg-[#1B365D] hover:bg-[#1B365D]/90 text-[#FFB84C] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform italic tracking-tighter w-[80%] sm:w-auto"
             >
               Join the Exclusive Waitlist
             </button>
