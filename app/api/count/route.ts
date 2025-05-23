@@ -26,7 +26,7 @@ export async function GET() {
       );
     }
 
-    const { count, error } = await supabase
+    const { count } = await supabase
       .from('daddies')
       .select('*', { count: 'exact' });
 
