@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { metadata } from './metadata';
+import Providers from './providers';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,46 +23,27 @@ const playfair = Playfair_Display({
 });
 
 const poppins = Poppins({
-  weight: ['400', '500', '600'],
-  variable: "--font-poppins",
-  subsets: ["latin"],
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
 });
 
-export const metadata: Metadata = {
-  title: "Sugar Daddy - On-Chain",
-  description: "A decentralized web app for on-chain sugar daddies on Solana",
-  openGraph: {
-    title: 'Sugar Daddy - On-Chain',
-    description: 'A decentralized web app for on-chain sugar daddies on Solana',
-    images: [
-      {
-        url: '/preview.png',
-        width: 1200,
-        height: 630,
-        alt: 'Sugar Daddy Preview'
-      }
-    ],
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Sugar Daddy - On-Chain',
-    description: 'A decentralized web app for on-chain sugar daddies on Solana',
-    images: ['/preview.png'],
-  }
-};
+export { metadata };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${poppins.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

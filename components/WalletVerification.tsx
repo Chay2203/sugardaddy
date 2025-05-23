@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { z } from 'zod';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
-const walletSchema = z.string().min(32).max(44).regex(/^[1-9A-HJ-NP-Za-km-z]+$/);
 const emailSchema = z.string().email();
 
 interface VerificationState {
@@ -13,7 +14,7 @@ interface VerificationState {
 }
 
 export default function WalletVerification() {
-  const [walletAddress, setWalletAddress] = useState('');
+  const { publicKey, connected } = useWallet();
   const [email, setEmail] = useState('');
   const [state, setState] = useState<VerificationState>({
     step: 'initial',
@@ -25,9 +26,7 @@ export default function WalletVerification() {
 
   const validateInputs = () => {
     try {
-      if (state.step === 'initial') {
-        walletSchema.parse(walletAddress);
-      } else if (state.step === 'email') {
+      if (state.step === 'email') {
         emailSchema.parse(email);
       }
       return true;
@@ -35,7 +34,7 @@ export default function WalletVerification() {
       if (error instanceof z.ZodError) {
         setState(prev => ({
           ...prev,
-          error: 'Invalid input format',
+          error: 'Invalid email format',
           isLoading: false,
         }));
       }
@@ -43,7 +42,9 @@ export default function WalletVerification() {
     }
   };
 
-  const verifyWallet = async (address: string) => {
+  const verifyWallet = async () => {
+    if (!publicKey) return;
+    
     if (state.attempts >= 5) {
       setState(prev => ({
         ...prev,
@@ -69,7 +70,7 @@ export default function WalletVerification() {
         },
         credentials: 'same-origin',
         body: JSON.stringify({ 
-          address: address.trim(),
+          address: publicKey.toString(),
           timestamp: Date.now() 
         }),
       });
@@ -112,8 +113,8 @@ export default function WalletVerification() {
       return;
     }
 
-    if (state.step === 'initial') {
-      await verifyWallet(walletAddress);
+    if (state.step === 'initial' && connected) {
+      await verifyWallet();
     } else if (state.step === 'email') {
       setState(prev => ({ ...prev, isLoading: true }));
       try {
@@ -125,7 +126,7 @@ export default function WalletVerification() {
           },
           credentials: 'same-origin',
           body: JSON.stringify({
-            wallet_address: walletAddress.trim(),
+            wallet_address: publicKey?.toString(),
             email: email.trim().toLowerCase(),
             timestamp: Date.now()
           }),
@@ -150,27 +151,20 @@ export default function WalletVerification() {
   return (
     <div className="w-full max-w-md mx-auto mb-6">
       {state.step === 'initial' && (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              value={walletAddress}
-              onChange={(e) => setWalletAddress(e.target.value.trim())}
-              placeholder="Enter your Solana wallet address"
-              className="w-full px-4 py-2 rounded-full border border-[#1B365D]/20 focus:outline-none focus:border-[#1B365D] font-poppins text-[#1B365D]"
-              required
-              maxLength={44}
-              pattern="^[1-9A-HJ-NP-Za-km-z]+$"
-            />
+        <div className="space-y-4">
+          <div className="flex justify-center">
+            <WalletMultiButton className="!bg-[#1B365D] !text-[#FFB84C] !py-3 !px-6 !rounded-full !font-poppins !transition-all hover:!bg-[#1B365D]/90" />
           </div>
-          <button
-            type="submit"
-            disabled={state.isLoading || state.attempts >= 5}
-            className="w-full bg-[#1B365D] text-[#FFB84C] py-2 rounded-full font-poppins transition-all hover:bg-[#1B365D]/90 disabled:opacity-50"
-          >
-            {state.isLoading ? 'Verifying...' : 'Verify Wallet'}
-          </button>
-        </form>
+          {connected && (
+            <button
+              onClick={() => verifyWallet()}
+              disabled={state.isLoading || state.attempts >= 5}
+              className="w-full bg-[#1B365D] text-[#FFB84C] py-3 rounded-full font-poppins transition-all hover:bg-[#1B365D]/90 disabled:opacity-50"
+            >
+              {state.isLoading ? 'Verifying...' : 'Verify Balance'}
+            </button>
+          )}
+        </div>
       )}
 
       {state.step === 'email' && (
@@ -184,7 +178,7 @@ export default function WalletVerification() {
               value={email}
               onChange={(e) => setEmail(e.target.value.trim())}
               placeholder="Enter your email for exclusive access"
-              className="w-full px-4 py-2 rounded-full border border-[#1B365D]/20 focus:outline-none focus:border-[#1B365D] font-poppins text-[#1B365D]"
+              className="w-full px-4 py-3 rounded-full border border-[#1B365D]/20 focus:outline-none focus:border-[#1B365D] font-poppins text-[#1B365D]"
               required
               maxLength={255}
             />
@@ -192,7 +186,7 @@ export default function WalletVerification() {
           <button
             type="submit"
             disabled={state.isLoading}
-            className="w-full bg-[#1B365D] text-[#FFB84C] py-2 rounded-full font-poppins transition-all hover:bg-[#1B365D]/90 disabled:opacity-50"
+            className="w-full bg-[#1B365D] text-[#FFB84C] py-3 rounded-full font-poppins transition-all hover:bg-[#1B365D]/90 disabled:opacity-50"
           >
             {state.isLoading ? 'Joining...' : 'Join Waitlist'}
           </button>
