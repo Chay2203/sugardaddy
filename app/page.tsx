@@ -49,42 +49,34 @@ export default function Home() {
         opacity={0.7}
         colors={['#FFB84C', '#1B365D', '#FFA726', '#FFD700']}
       />
-      <main className={`relative max-w-6xl mx-auto px-4 flex flex-col items-center ${windowSize.width > 786 ? 'pt-10' : 'pt-10'}`}>
-        <div className="flex flex-col items-center justify-center min-h-[50vh] w-full">
-          <div className="relative mb-2 w-full sm:w-auto text-center">
-            <button
-              className="bg-[#FFA726] hover:bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter w-[40%] mb-4 sm:mb-0 sm:w-auto"
-            >
-              are you a?
-            </button>
-          </div>
-          <div className="text-center mb-8 sm:mb-12">
-            <h1 className="text-[48px] sm:text-[80px] md:text-[120px] font-serif text-[#1B365D] leading-none italic">
-              Sugar Daddy
-            </h1>
-          </div>
-          <div className="relative w-full sm:w-auto text-center">
+      <main className="relative max-w-6xl mx-auto px-4 py-8 sm:py-12 min-h-screen flex flex-col items-center justify-center">
+        {!showVerification ? (
+          <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8">
+            <div className="text-center">
+              <button className="bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter mb-4">
+                are you a?
+              </button>
+              <h1 className="text-[48px] sm:text-[80px] md:text-[120px] font-serif text-[#1B365D] leading-none italic mt-4">
+                Sugar Daddy
+              </h1>
+            </div>
             <button
               onClick={() => setShowVerification(true)}
-              className="bg-[#1B365D] hover:bg-[#1B365D]/90 text-[#FFB84C] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform italic tracking-tighter w-[80%] sm:w-auto"
+              className="bg-[#1B365D] hover:bg-[#1B365D]/90 text-[#FFB84C] text-lg sm:text-xl font-poppins font-medium px-8 sm:px-10 py-3 sm:py-4 rounded-full transition-all transform italic tracking-tighter"
             >
               Join the Exclusive Waitlist
             </button>
+            <RegisteredList />
           </div>
-        </div>
-
-        <div className="w-full -mt-5">
-          {showVerification && (
-            <div>
-              <WalletVerification />
-              <RegisteredList />
-            </div>
-          )}
-          {!showVerification && <RegisteredList />}
-        </div>
-
-        <div className="mt-12 text-center w-full">
-          <p className="font-poppins text-[#1B365D]/70 text-xs sm:text-sm tracking-wider uppercase mb-1">
+        ) : (
+          <div className="w-full max-w-2xl mx-auto">
+            <WalletVerification />
+            <RegisteredList />
+          </div>
+        )}
+        
+        <div className="absolute bottom-4 left-0 right-0 text-center">
+          <p className="font-poppins text-[#1B365D]/70 text-xs sm:text-sm tracking-wider uppercase">
             Built on <span className="font-semibold">Solana</span>
           </p>
         </div>
