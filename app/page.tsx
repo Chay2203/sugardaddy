@@ -53,10 +53,10 @@ export default function Home() {
         {!showVerification ? (
           <div className="flex flex-col items-center justify-center space-y-6 sm:space-y-8">
             <div className="text-center">
-              <button className="bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter mb-4">
+              <button className="bg-[#FFA726] text-[#1B365D] text-lg sm:text-xl font-poppins font-medium px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all transform rotate-[-5deg] hover:scale-105 hover:rotate-[-10deg] italic tracking-tighter mb-2">
                 are you a?
               </button>
-              <h1 className="text-[48px] sm:text-[80px] md:text-[120px] font-serif text-[#1B365D] leading-none italic mt-4">
+              <h1 className="text-[48px] sm:text-[80px] md:text-[120px] font-serif text-[#1B365D] leading-none italic">
                 Sugar Daddy
               </h1>
             </div>
