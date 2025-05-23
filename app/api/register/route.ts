@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
-import { PostgrestError } from '@supabase/supabase-js';
 
 // Create a Supabase client with the service role key
 const supabase = createClient(
