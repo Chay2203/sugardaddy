@@ -32,6 +32,7 @@ export async function POST(request: Request) {
     const data = await response.json();
     return NextResponse.json({ balance: data.result.value });
   } catch (error) {
+    console.error('Error fetching balance:', error);
     return NextResponse.json(
       { error: 'Server error' },
       { status: 500 }

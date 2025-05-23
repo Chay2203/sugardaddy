@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
+import { PostgrestError } from '@supabase/supabase-js';
 
 // Create a Supabase client with the service role key
 const supabase = createClient(
@@ -77,10 +78,10 @@ export async function POST(request: Request) {
           created_at: data.created_at
         }
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Supabase error:', error);
       
-      if (error.code === '23505') {
+      if (error && typeof error === 'object' && 'code' in error && error.code === '23505') {
         return NextResponse.json(
           { error: 'This wallet address or email is already registered' },
           { status: 409 }
@@ -88,7 +89,7 @@ export async function POST(request: Request) {
       }
 
       return NextResponse.json(
-        { error: 'Failed to register user', details: error.message },
+        { error: 'Failed to register user', details: error instanceof Error ? error.message : 'Unknown error' },
         { status: 500 }
       );
     }

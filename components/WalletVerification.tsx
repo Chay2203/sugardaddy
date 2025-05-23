@@ -205,7 +205,7 @@ export default function WalletVerification() {
             Welcome to the club! 🎉
           </h3>
           <p className="text-[#1B365D]/70 font-poppins text-sm">
-            We'll be in touch with exclusive access details.
+            We&apos;ll be in touch with exclusive access details.
           </p>
         </div>
       )}
